@@ -1,0 +1,37 @@
+<html>
+
+<head>
+</head>
+
+<body style="padding: 10px;display: flex;">
+    <div id="myContent" style="position: relative; width:50%;font-size: 20px;overflow: scroll;">
+
+        <div id="btn_to_top"
+            style="position: absolute; bottom: 0;right:0%; height: 10%;aspect-ratio: 1; background-color: #AAAA;font-size: 5vh;display: flex;justify-content: center;align-items: center;">
+            ^
+        </div>
+    </div>
+    <textarea id="myTextArea" style="width:50%;font-size: 20px;  min-height: 50%; background-color: #999;"></textarea>
+</body>
+
+<script>
+    const __content__ = document.getElementById("myContent");
+    const __textarea__ = document.getElementById("myTextArea");
+    const btnToTop = document.getElementById("btn_to_top");
+
+    __textarea__.addEventListener("focusout", (e) => {
+        __content__.innerText = `${__textarea__.value}`
+        localStorage.setItem("last_content", __textarea__.value)
+    });
+    __textarea__.addEventListener("paste", (e) => {
+        return true;
+    });
+    window.addEventListener("load", () => {
+        localStorage.getItem("last_content")
+    })
+    btnToTop.onclick = () => {
+        __content__.scrollTop = 0
+    }
+</script>
+
+</html>
