@@ -3,50 +3,26 @@
 <head>
     <style>
         textarea:focus {
-            outline-color: red;
-            outline-width: 20px;
-        }
-
-        #myContent_container {
-            position: relative;
-            width: 50%;
-            font-size: 20px;
-            overflow: scroll;
-        }
-
-        #myContent {
-            background-color: #AAAA;
-        }
-
-        #btn_to_top {
-            cursor: default;
-            position: fixed;
-            bottom: 48px;
-            right: 52%;
-            height: 10%;
-            aspect-ratio: 1;
-            background-color: #AAAA;
-            font-size: 5vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            outline: 0.5rem solid #ff0000;
         }
     </style>
 </head>
 
 <body style="padding: 10px;display: flex;">
-    <div id="myContent_container">
-        <div id="myContent">
-        </div>
-        <div id="btn_to_top">
-            ^
-        </div>
+    <div id="myContent" style=" width:50%;font-size: 20px;overflow: scroll;">
+
     </div>
     <textarea id="myTextArea" style="width:50%;font-size: 20px;  min-height: 50%; background-color: #999;"></textarea>
+    <div id="btn_to_top"
+        style="position: fixed; bottom: 0;right:50%; height: 10%;aspect-ratio: 1; background-color: #AAAA;">
+
+        <svg class="arrow-up" viewBox="0 0 24 24">
+            <path d="M12 2L1 12h7v10h8V12h7L12 2z" />
+        </svg>
+    </div>
 </body>
-<!-- todo test area focus -->
+
 <script>
-    const __Content_container = document.getElementById("myContent_container");
     const __content__ = document.getElementById("myContent");
     const __textarea__ = document.getElementById("myTextArea");
     const btnToTop = document.getElementById("btn_to_top");
@@ -56,13 +32,17 @@
         localStorage.setItem("last_content", __textarea__.value)
     });
     __textarea__.addEventListener("paste", (e) => {
+        var strPartA = __textarea__.value.substring(0, __textarea__.selectionStart);
+        var strPartB = __textarea__.value.substring(__textarea__.selectionEnd, __textarea__.value.length);
+        __textarea__.value = strPartA + strPartB + "\n\n";
         return true;
     });
     window.addEventListener("load", () => {
         localStorage.getItem("last_content")
+        __content__.innerText = __textarea__.value = "";
     })
     btnToTop.onclick = () => {
-        __Content_container.scrollTop = 0
+        __content__.scrollTop = 0
     }
 </script>
 
