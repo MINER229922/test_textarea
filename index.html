@@ -59,7 +59,7 @@
         return msg.replace(regex, "");
     }
     var UNWANTED_CHARACTERS = [
-        "App",
+        "QWETRY",
         /EAC.*\d+.*EAC/, 
         /<.*>/
     ];
@@ -69,8 +69,9 @@
     const btnToTop = document.getElementById("btn_to_top");
 
     __textarea__.addEventListener("focusout", (e) => {
-        __content__.innerText = `${__textarea__.value}`
-        localStorage.setItem("last_content", __textarea__.value)
+        let x = removeUnwantedCharacters(`${__textarea__.value}`);
+        __content__.innerText = x;
+        localStorage.setItem("last_content", x);
     });
     __textarea__.addEventListener("paste", (e) => {
         return true;
