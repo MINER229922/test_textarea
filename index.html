@@ -47,6 +47,22 @@
 </body>
 <!-- todo test area focus -->
 <script>
+    function removeUnwantedCharacters(msg) {
+        if (msg === null || msg === undefined) {
+            return;
+        }
+        let pattern = UNWANTED_CHARACTERS.map(char => {
+            return char instanceof RegExp ? char.source : char;
+        }).join("|");
+        // Create a RegExp object with case-insensitive flag
+        let regex = new RegExp(pattern, 'i');
+        return msg.replace(regex, "");
+    }
+    var UNWANTED_CHARACTERS = [
+        "App"
+        /EAC.*\d+.*EAC/, 
+        /<.*>/
+    ];
     const __Content_container = document.getElementById("myContent_container");
     const __content__ = document.getElementById("myContent");
     const __textarea__ = document.getElementById("myTextArea");
