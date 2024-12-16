@@ -7,7 +7,7 @@
             return char instanceof RegExp ? char.source : char;
         }).join("|");
         // Create a RegExp object with case-insensitive flag
-        let regex = new RegExp(pattern, 'i');
+        let regex = new RegExp(pattern, 'ig');
         return msg.replace(regex, "");
     }
     var UNWANTED_CHARACTERS = [
